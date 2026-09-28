@@ -64,10 +64,12 @@ def chay_plan_execute(yc: YeuCau, model) -> dict:
     h = HarnessMiddleware(yc)
 
     # 1 · Lập kế hoạch: một lần gọi model, chưa chạy tool nào.
-    planner = model.with_structured_output(KeHoach, method="function_calling", include_raw=True)
+    # json_mode thay vì function_calling: thinking mode của DeepSeek không cho ép tool_choice.
+    planner = model.with_structured_output(KeHoach, method="json_mode", include_raw=True)
     out = planner.invoke([
         ("system", system_prompt(yc) + "\n\nNhiệm vụ lúc này: CHỈ lập kế hoạch (tối đa 6 bước), "
-                   "chưa thực hiện. Tool sẵn có: search_flights, check_seat, book_seat, pay, get_booking."),
+                   "chưa thực hiện. Tool sẵn có: search_flights, check_seat, book_seat, pay, get_booking.\n"
+                   'Trả về đúng một JSON dạng {"buoc": ["bước 1", "bước 2", ...]}.'),
         ("user", cau_hoi_khach(yc)),
     ])
     h.dem_model(out["raw"])

@@ -238,7 +238,7 @@ class HarnessMiddleware(AgentMiddleware):
         self.dem_model(ai)
         calls = getattr(ai, "tool_calls", None) or []
         if not calls:
-            self.trace.append(f"[V{self.so_goi_model}] AI   : {str(ai.content)[:300]}")
+            self.trace.append(f"[V{self.so_goi_model}] AI   : {' '.join(str(ai.content).split())[:200]}")
         for c in calls:
             ten, args = c["name"], c["args"]
             self.trace.append(f"[V{self.so_goi_model}] AI   → {ten}({_args(args)})")
