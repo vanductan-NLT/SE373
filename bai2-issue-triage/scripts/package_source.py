@@ -4,7 +4,7 @@ from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "output" / "BTVN1_Issue_Triage_Van_Duc_Tan_24521586_source.zip"
+OUTPUT = ROOT / "output" / "BTVN2_Issue_Triage_Van_Duc_Tan_24521586_source.zip"
 EXCLUDED_PARTS = {
     ".git",
     ".venv",
