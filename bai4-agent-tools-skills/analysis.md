@@ -2,10 +2,14 @@
 
 **Môn học:** Agentic AI Engineering  
 **Học viên:** Văn Đức Tân - MSSV: 24521586  
-**Nội dung bài tập:** Hoàn thiện cả 2 Block bài tập (Block 1: Tra cứu chính sách hoàn tiền & Block 2: Phân tích khối lượng công việc và kiểm tra quá tải)  
-**Mô hình LLM sử dụng:** DeepSeek API (`deepseek-chat`, format OpenAI-compatible)
+**Nội dung bài tập:** BTVN#4 - Hoàn thiện cả 2 Block bài tập (Block 1: Tra cứu chính sách hoàn tiền & Block 2: Phân tích khối lượng công việc và kiểm tra quá tải)  
+**Mô hình LLM sử dụng:** DeepSeek API (`deepseek-chat`, format OpenAI-compatible)  
+**GitHub Repository:** [https://github.com/vanductan-NLT/SE373/tree/main/bai4-agent-tools-skills](https://github.com/vanductan-NLT/SE373/tree/main/bai4-agent-tools-skills)  
+**Interactive HTML Explainer:** [Stage 04 Explainer HTML](https://htmlpreview.github.io/?https://github.com/vanductan-NLT/SE373/blob/main/bai4-agent-tools-skills/stage-04-script-skill/explainer.html)  
+**Google Drive Link (Source zip & Báo cáo):** [LINK_GOOGLE_DRIVE_PUBLIC]
 
 ---
+
 
 # PHẦN 1: BÀI TẬP BLOCK 1 (STAGES 00 - 02)
 ## Tra cứu chính sách đúng phiên bản bằng Tool Use & Skill Use
