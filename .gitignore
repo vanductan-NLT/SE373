@@ -3,6 +3,7 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.pytest_temp/
 .playwright-cli/
 .coverage
 htmlcov/
@@ -10,3 +11,4 @@ tmp/
 output/
 bai2-issue-triage/docs/screenshots/*.png
 !bai2-issue-triage/docs/screenshots/.gitkeep
+
