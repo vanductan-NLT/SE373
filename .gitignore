@@ -12,3 +12,6 @@ output/
 bai2-issue-triage/docs/screenshots/*.png
 !bai2-issue-triage/docs/screenshots/.gitkeep
 
+
+# Repo nhóm 15 là một repo git riêng (se373agenticengineering/nhom-15), clone vào đây để làm việc
+do-an-nhom15/nhom-15/
