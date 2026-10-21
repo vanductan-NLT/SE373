@@ -28,6 +28,17 @@ python -m venv .venv
 .venv\Scripts\python.exe run_demo.py --reset
 ```
 
+### Giao diện chat
+
+```powershell
+.venv\Scripts\python.exe -m streamlit run app.py
+```
+
+Mở Local URL in ra terminal. Chat với agent, thanh bên hiện memory đã nạp, `MEMORY.md` trên đĩa và các file trong `workspace/output/`.
+Nút **Mở session mới** xóa history và nạp lại memory từ đĩa. Mỗi lượt hiện đủ vòng lặp agent: model đề xuất tool, harness chạy tool, kết quả quay lại model.
+
+### Demo tự động
+
 `run_demo.py` chạy 4 session, mỗi session dựng agent mới với history rỗng:
 
 1. Session 1: chốt quy ước (tên `bao-cao-YYYY-MM-DD.md`, tiếng Việt, dòng đầu `TL;DR:`).
@@ -47,6 +58,7 @@ Kết quả ghi ở `demo-log.txt`, memory cuối cùng ở `memory/MEMORY.md`. 
 | `agent.py`, `prompts.py` | Agent stage-01 + nạp memory vào system prompt mỗi session |
 | `config.py`, `paths.py`, `tools/files.py` | Copy nguyên từ `stage-01-files` |
 | `run_demo.py` | 4 session + tự kiểm PASS/FAIL |
+| `app.py` | Giao diện chat Streamlit để thử tay |
 
 ## Ghi chú
 
