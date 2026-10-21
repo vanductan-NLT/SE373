@@ -1,0 +1,95 @@
+
+==============================================================================
+SESSION-1: Chốt quy ước (không có memory từ trước)
+==============================================================================
+MEMORY INJECTED vào system prompt:
+  (rỗng)
+
+USER: Mình chốt quy ước báo cáo cho dự án này: báo cáo tuần ghi vào file output/bao-cao-YYYY-MM-DD.md (YYYY-MM-DD là ngày hôm nay), viết bằng tiếng Việt, dòng đầu tiên của file bắt đầu bằng 'TL;DR:' tóm tắt một câu. Hãy ghi nhớ quy ước này.
+  [tool call] remember_convention({'topic': 'report-format', 'rule': "Báo cáo tuần của dự án được ghi vào file output/bao-cao-YYYY-MM-DD.md, trong đó YYYY-MM-DD là ngày tạo báo cáo (ngày hôm nay). Nội dung báo cáo viết bằng tiếng Việt. Dòng đầu tiên của file phải bắt đầu bằng 'TL;DR:' và tóm tắt toàn bộ báo cáo trong một câu."})
+  [tool result] {"ok": true, "topic": "report-format", "status": "created"}
+AGENT: Đã ghi nhớ quy ước vào topic `report-format`:
+
+- File báo cáo tuần: `output/bao-cao-YYYY-MM-DD.md` (ngày hôm nay)
+- Ngôn ngữ: tiếng Việt
+- Dòng đầu tiên bắt đầu bằng `TL;DR:` tóm tắt một câu
+file MỚI do session này tạo trong output/: []
+
+==============================================================================
+SESSION-2: Viết báo cáo, KHÔNG nhắc lại quy ước
+==============================================================================
+MEMORY INJECTED vào system prompt:
+- (report-format) Báo cáo tuần của dự án được ghi vào file output/bao-cao-YYYY-MM-DD.md, trong đó YYYY-MM-DD là ngày tạo báo cáo (ngày hôm nay). Nội dung báo cáo viết bằng tiếng Việt. Dòng đầu tiên của file phải bắt đầu bằng 'TL;DR:' và tóm tắt toàn bộ báo cáo trong một câu.
+
+USER: Hôm nay là 2026-10-21. Đọc data/weekly_notes.md rồi viết báo cáo tuần.
+  [tool call] read_file({'path': 'data/weekly_notes.md'})
+  [tool result] {"ok": true, "path": "data/weekly_notes.md", "content": "# Ghi chú công việc tuần 40 (dữ liệu giả cho lab)\n\n## 2026-09-28: Endpoint đăng nhập\n- Trạng thái: H...
+  [tool call] write_file({'path': 'output/bao-cao-2026-10-21.md', 'content': 'TL;DR: Tuần 40 ghi nhận endpoint đăng nhập đã hoàn thành, refresh token đang làm dở (60%), lỗi test OAuth trên staging chưa có nguyên nhân và tài liệu API cho mobile vẫn chưa có người phụ trách.\n\n# Báo cáo tuần 40 (tạo ngày 2026-10-21)\n\n## Tổng quan\n- Tổng số hạng mục: 5\n- Hoàn thành: 1\n- Đang làm: 1\n- Chưa giải quyết / Chưa bắt đầu: 2\n- Kế hoạch: 1\n\n## Chi tiết theo hạng mục\n\n| Ngày | Hạng mục | Trạng thái | Phụ trách |\n|---|---|---|---|\n| 2026-09-28 | Endpoint đăng nhập | Hoàn thành | Lan |\n| 2026-09-29 | Refresh token | Đang làm | Minh |\n| 2026-09-30 | Lỗi test OAuth | Chưa giải quyết | Hoa |\n| 2026-10-01 | Tài liệu API đăng nhập cho mobile | Chưa bắt đầu | (chưa có người phụ trách) |\n| 2026-10-02 | Kế hoạch tuần tới | Kế hoạch | Cả nhóm |\n\n### 1. Endpoint đăng nhập — Hoàn thành (Lan)\nHoàn thành endpoint POST /auth/login, đã merge vào nhánh main, có unit test cho trường hợp đăng nhập đúng và sai mật khẩu.\n\n### 2. Refresh token — Đang làm (Minh)\nĐang implement refresh token rotation, hoàn thành khoảng 60%. Còn phần thu hồi refresh token cũ khi đăng xuất.\n\n### 3. Lỗi test OAuth — Chưa giải quyết (Hoa)\nTest tích hợp đăng nhập OAuth với Google thất bại trên staging do redirect URI không khớp. Chưa xác định được cấu hình nào sai.\n\n### 4. Tài liệu API đăng nhập cho mobile — Chưa bắt đầu\nTeam mobile cần tài liệu API đăng nhập và refresh token. Chưa có người nhận việc và chưa có deadline.\n\n### 5. Kế hoạch tuần tới — Cả nhóm\nHoàn tất refresh token, tìm nguyên nhân lỗi OAuth trên staging, phân công người viết tài liệu API cho mobile.\n\n## Rủi ro và vấn đề cần xử lý\n- Lỗi OAuth trên staging chưa xác định nguyên nhân, có thể ảnh hưởng tiến độ kiểm thử tích hợp.\n- Hạng mục tài liệu API cho mobile chưa có người phụ trách và chưa có deadline — nguy cơ bị bỏ quên.\n- Refresh token mới đạt 60%, phần thu hồi token cũ khi đăng xuất còn lại có thể phát sinh thêm công việc.\n\n## Đề xuất\n- Ưu tiên rà soát cấu hình redirect URI giữa môi trường staging và Google Console để gỡ lỗi OAuth.\n- Chỉ định người phụ trách và deadline cho tài liệu API mobile ngay trong tuần 41.\n- Đặt mốc hoàn thành cho phần thu hồi refresh token khi đăng xuất.\n'})
+  [tool result] {"ok": true, "path": "output/bao-cao-2026-10-21.md", "bytes": 2599, "status": "created"}
+AGENT: Đã đọc `data/weekly_notes.md` và ghi báo cáo vào `output/bao-cao-2026-10-21.md`.
+
+Nội dung chính:
+- **Hoàn thành (1):** endpoint POST /auth/login (Lan), đã merge main, có unit test.
+- **Đang làm (1):** refresh token rotation ~60% (Minh), còn phần thu hồi token cũ khi đăng xuất.
+- **Chưa giải quyết (1):** test OAuth Google trên staging lỗi redirect URI (Hoa), chưa rõ cấu hình sai ở đâu.
+- **Chưa bắt đầu (1):** tài liệu API đăng nhập cho mobile — chưa có người phụ trách, chưa có deadline.
+- **Kế hoạch tuần tới:** chốt refresh token, tìm nguyên nhân lỗi OAuth, phân công viết tài liệu API.
+
+Đề xuất chính: rà soát redirect URI staging vs Google Console, gán người + deadline cho tài liệu mobile, đặt mốc cho phần thu hồi refresh token.
+file MỚI do session này tạo trong output/: ['bao-cao-2026-10-21.md']
+
+==============================================================================
+SESSION-3: Đổi quy ước
+==============================================================================
+MEMORY INJECTED vào system prompt:
+- (report-format) Báo cáo tuần của dự án được ghi vào file output/bao-cao-YYYY-MM-DD.md, trong đó YYYY-MM-DD là ngày tạo báo cáo (ngày hôm nay). Nội dung báo cáo viết bằng tiếng Việt. Dòng đầu tiên của file phải bắt đầu bằng 'TL;DR:' và tóm tắt toàn bộ báo cáo trong một câu.
+
+USER: Mình đổi quy ước báo cáo: từ giờ file tên output/report-YYYY-MM-DD.md, viết bằng tiếng Anh, dòng đầu vẫn bắt đầu bằng 'TL;DR:'. Quy ước cũ bỏ. Hãy cập nhật ghi nhớ.
+  [tool call] remember_convention({'topic': 'report-format', 'rule': "Báo cáo tuần của dự án được ghi vào file output/report-YYYY-MM-DD.md, trong đó YYYY-MM-DD là ngày tạo báo cáo (ngày hôm nay). Nội dung báo cáo viết bằng tiếng Anh. Dòng đầu tiên của file phải bắt đầu bằng 'TL;DR:' và tóm tắt toàn bộ báo cáo trong một câu."})
+  [tool result] {"ok": true, "topic": "report-format", "status": "updated"}
+AGENT: Đã cập nhật ghi nhớ (topic `report-format`, trạng thái: updated). Quy ước hiện hành:
+
+- File: `output/report-YYYY-MM-DD.md` (YYYY-MM-DD là ngày tạo báo cáo)
+- Ngôn ngữ: tiếng Anh
+- Dòng đầu bắt đầu bằng `TL;DR:` tóm tắt toàn bộ báo cáo trong một câu
+
+Quy ước cũ (tên `bao-cao-*.md`, tiếng Việt) đã bị thay thế.
+file MỚI do session này tạo trong output/: []
+
+==============================================================================
+SESSION-4: Viết báo cáo, KHÔNG nhắc lại quy ước
+==============================================================================
+MEMORY INJECTED vào system prompt:
+- (report-format) Báo cáo tuần của dự án được ghi vào file output/report-YYYY-MM-DD.md, trong đó YYYY-MM-DD là ngày tạo báo cáo (ngày hôm nay). Nội dung báo cáo viết bằng tiếng Anh. Dòng đầu tiên của file phải bắt đầu bằng 'TL;DR:' và tóm tắt toàn bộ báo cáo trong một câu.
+
+USER: Hôm nay là 2026-10-21. Đọc data/weekly_notes.md rồi viết báo cáo tuần.
+  [tool call] read_file({'path': 'data/weekly_notes.md'})
+  [tool result] {"ok": true, "path": "data/weekly_notes.md", "content": "# Ghi chú công việc tuần 40 (dữ liệu giả cho lab)\n\n## 2026-09-28: Endpoint đăng nhập\n- Trạng thái: H...
+  [tool call] write_file({'path': 'output/report-2026-10-21.md', 'content': 'TL;DR: Week 40 delivered the login endpoint, while refresh token work is ~60% done, the Google OAuth staging failure is still unresolved, and the mobile API documentation remains unassigned.\n\n# Weekly Report — Week 40 (2026-09-28 to 2026-10-02)\n\n## Summary\nThree auth-related workstreams moved forward or stalled this week: the login endpoint was completed and merged, refresh token rotation is partially implemented, and an OAuth integration test failure on staging is still open. One item (mobile API documentation) has no owner yet.\n\n## Completed\n- **Login endpoint (2026-09-28)** — Owner: Lan\n  - `POST /auth/login` finished and merged into `main`.\n  - Covered by unit tests for both valid credentials and incorrect password.\n\n## In progress\n- **Refresh token rotation (2026-09-29)** — Owner: Minh\n  - Approximately 60% complete.\n  - Remaining work: revoke the old refresh token on logout.\n\n## Blocked / unresolved\n- **OAuth test failure (2026-09-30)** — Owner: Hoa\n  - Google OAuth integration test fails on staging due to a redirect URI mismatch.\n  - Root cause not yet identified; the misconfigured setting is unknown.\n\n## Not started\n- **Login API documentation for mobile (2026-10-01)** — Owner: unassigned\n  - Mobile team needs documentation for the login and refresh token APIs.\n  - No owner and no deadline set.\n\n## Next week plan\n- Finish refresh token rotation.\n- Investigate and fix the OAuth failure on staging.\n- Assign an owner for the mobile API documentation.\n\n## Risks / attention needed\n- The unassigned documentation item has no deadline and may block the mobile team.\n- The OAuth issue is undiagnosed and could delay the auth release if it persists.\n'})
+  [tool result] {"ok": true, "path": "output/report-2026-10-21.md", "bytes": 1684, "status": "created"}
+AGENT: Đã đọc `data/weekly_notes.md` và ghi báo cáo vào `output/report-2026-10-21.md` (theo quy ước: tiếng Anh, dòng đầu bắt đầu bằng `TL;DR:`).
+
+Nội dung chính:
+- **Hoàn thành:** endpoint `POST /auth/login` (Lan), đã merge + unit test.
+- **Đang làm:** refresh token rotation (Minh) ~60%, còn thu hồi token cũ khi logout.
+- **Chưa giải quyết:** lỗi OAuth Google trên staging do redirect URI không khớp (Hoa), chưa rõ nguyên nhân.
+- **Chưa bắt đầu:** tài liệu API đăng nhập cho mobile — chưa có người phụ trách, chưa có deadline.
+- **Rủi ro:** việc tài liệu mobile bị treo vì thiếu owner/deadline; lỗi OAuth chưa chẩn đoán có thể trễ release.
+file MỚI do session này tạo trong output/: ['report-2026-10-21.md']
+
+==============================================================================
+MEMORY.md cuối cùng
+==============================================================================
+# MEMORY: quy ước dự án đã thống nhất
+
+- [superseded 2026-10-21 09:16 bởi session-3] topic=report-format | rule=Báo cáo tuần của dự án được ghi vào file output/bao-cao-YYYY-MM-DD.md, trong đó YYYY-MM-DD là ngày tạo báo cáo (ngày hôm nay). Nội dung báo cáo viết bằng tiếng Việt. Dòng đầu tiên của file phải bắt đầu bằng 'TL;DR:' và tóm tắt toàn bộ báo cáo trong một câu. | từ session-1 lúc 2026-10-21 09:16
+- [active] topic=report-format | rule=Báo cáo tuần của dự án được ghi vào file output/report-YYYY-MM-DD.md, trong đó YYYY-MM-DD là ngày tạo báo cáo (ngày hôm nay). Nội dung báo cáo viết bằng tiếng Anh. Dòng đầu tiên của file phải bắt đầu bằng 'TL;DR:' và tóm tắt toàn bộ báo cáo trong một câu. | từ session-3 lúc 2026-10-21 09:16
+
+==============================================================================
+KIỂM CHỨNG (do code kiểm file thực tế, không dựa vào lời agent)
+==============================================================================
+Chứng minh 1 (session mới vẫn theo quy ước cũ): PASS | session-2 tạo ['bao-cao-2026-10-21.md'] | bao-cao-2026-10-21.md | dòng đầu: TL;DR: Tuần 40 ghi nhận endpoint đăng nhập đã hoàn thành, refresh toke | tỉ lệ dấu tiếng Việt 0.141
+Chứng minh 2 (quy ước đổi, session sau theo quy ước mới): PASS | session-4 tạo ['report-2026-10-21.md'] | report-2026-10-21.md | dòng đầu: TL;DR: Week 40 delivered the login endpoint, while refresh token work  | tỉ lệ dấu tiếng Việt 0.000
+Thông tin thêm (không tính PASS/FAIL):
+  MEMORY.md giữ dòng superseded làm lịch sử? có
+  memory nạp vào session-4 còn nhắc quy ước cũ? không

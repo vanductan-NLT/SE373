@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Challenge A: Persistent memory</title>
+<style>
+  :root {
+    --green: #00674a;
+    --green-soft: #e3f0ea;
+    --orange: #d97706;
+    --orange-soft: #fdf0dc;
+    --brown: #6f4e37;
+    --ink: #1d2b27;
+    --muted: #5d6b66;
+    --line: #d6ddd9;
+    --bg: #f6f7f5;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #101614; overflow: hidden; }
+  body { position: relative; font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; color: var(--ink); }
+
+  /* Sân khấu cố định 1280x720, JS scale vừa cửa sổ để luôn đúng 16:9 */
+  #stage { width: 1280px; height: 720px; background: var(--bg); position: absolute; left: 50%; top: 50%; transform-origin: center center; padding: 30px 40px 0; display: flex; flex-direction: column; }
+
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid var(--orange); padding-bottom: 10px; }
+  h1 { font-size: 34px; line-height: 1.1; color: var(--green); letter-spacing: -0.3px; }
+  .goal { font-size: 16px; color: var(--muted); margin-top: 6px; }
+  .goal b { color: var(--ink); }
+  .meta { font-size: 13px; color: var(--muted); text-align: right; line-height: 1.45; }
+  .meta code, td code, .mem code { font-family: Consolas, "Courier New", monospace; }
+
+  main { display: grid; grid-template-columns: 640px 1fr; gap: 26px; margin-top: 16px; flex: 1; min-height: 0; }
+  h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--green); margin-bottom: 8px; }
+
+  /* Bảng 5 gợi ý */
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+  th { background: var(--green); color: #fff; text-align: left; font-size: 13px; padding: 7px 10px; letter-spacing: .5px; }
+  td { padding: 8px 10px; vertical-align: top; border-top: 1px solid var(--line); font-size: 14.5px; line-height: 1.32; }
+  td.q { width: 112px; font-weight: 700; color: var(--green); font-size: 14.5px; }
+  td.q span { display: block; font-weight: 400; color: var(--muted); font-size: 11.5px; margin-top: 2px; }
+  td code { background: var(--green-soft); padding: 0 4px; border-radius: 3px; font-size: 12.5px; }
+  td .why { display: block; color: var(--muted); font-size: 13px; margin-top: 3px; }
+  tr:nth-child(even) td { background: #fafbfa; }
+
+  /* Dòng thời gian 4 session */
+  .flow { display: flex; flex-direction: column; gap: 7px; }
+  .row { display: grid; grid-template-columns: 92px 1fr; background: var(--card); border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.12); overflow: hidden; border-left: 5px solid var(--green); }
+  .row.change { border-left-color: var(--orange); }
+  .row .tag { padding: 8px 8px; font-weight: 700; font-size: 14.5px; line-height: 1.25; background: var(--green-soft); color: var(--green); }
+  .row.change .tag { background: var(--orange-soft); color: #9a5200; }
+  .row .tag small { display: block; font-weight: 400; font-size: 11px; color: var(--muted); }
+  .row .body { padding: 8px 10px; font-size: 15px; line-height: 1.35; }
+  .row .body .out { display: block; margin-top: 2px; color: var(--green); font-weight: 600; }
+  .row.change .body .out { color: #9a5200; }
+  .row code { font-family: Consolas, "Courier New", monospace; font-size: 13.5px; background: #eef1ef; padding: 0 4px; border-radius: 3px; }
+
+  .mem { margin-top: 9px; background: #1f2a26; color: #dfe9e4; border-radius: 8px; padding: 9px 12px; font-family: Consolas, "Courier New", monospace; font-size: 13px; line-height: 1.5; }
+  .mem .file { color: #f5b455; font-weight: 700; margin-bottom: 3px; }
+  .mem .old { color: #8a9a93; text-decoration: line-through; }
+  .mem .new { color: #8de0b5; }
+  .mem .badge { color: #f5b455; text-decoration: none; display: inline-block; }
+
+  /* Kết quả kiểm chứng */
+  footer { margin: 12px -40px 0; padding: 11px 40px 10px; background: var(--green); color: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .proof { font-size: 14px; line-height: 1.35; }
+  .proof b { display: inline-block; background: #fff; color: var(--green); padding: 1px 9px; border-radius: 12px; margin-right: 7px; font-size: 13px; letter-spacing: .5px; }
+  .proof code { font-family: Consolas, "Courier New", monospace; font-size: 12.5px; background: rgba(255,255,255,.16); padding: 0 4px; border-radius: 3px; }
+  .lesson { grid-column: 1 / -1; font-size: 12.5px; color: #cfe6dc; border-top: 1px solid rgba(255,255,255,.25); padding-top: 6px; }
+  .lesson b { color: #ffd28a; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <header>
+    <div>
+      <h1>Challenge A · Persistent memory</h1>
+      <div class="goal"><b>Mục tiêu:</b> agent nhớ quy ước dự án qua nhiều session, và cập nhật khi quy ước đổi.</div>
+    </div>
+    <div class="meta">
+      Agent dùng lại: <code>stage-01-files</code> (BTVN#4) + 1 tool <code>remember_convention</code><br>
+      Văn Đức Tân · 24521586 · SE373.R11
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>5 câu hỏi gợi ý → lựa chọn của mình</h2>
+      <table>
+        <tr><th>Câu hỏi</th><th>Mình chọn · vì sao</th></tr>
+        <tr>
+          <td class="q">Lưu ở đâu<span>Markdown, JSON hay SQLite?</span></td>
+          <td>Một file <code>memory/MEMORY.md</code>, mỗi dòng một quy ước (<code>topic</code> + <code>rule</code>).
+            <span class="why">Chỉ vài quy ước nên Markdown đủ, mở ra đọc được ngay. SQLite hay vector là thừa. Đặt ngoài <code>workspace/</code> nên <code>write_file</code> không ghi đè được.</span></td>
+        </tr>
+        <tr>
+          <td class="q">Ai ghi<span>Agent hay harness?</span></td>
+          <td>Agent gọi tool <code>remember_convention(topic, rule)</code> khi user chốt hoặc đổi quy ước; code lo phần thay thế dòng cũ.
+            <span class="why">Agent hiểu lúc nào user "chốt". LLM không tự sửa file nên không làm hỏng memory.</span></td>
+        </tr>
+        <tr>
+          <td class="q">Khi nào nạp<span>Mở session hay khi cần?</span></td>
+          <td>Lúc mở session: nạp các dòng <code>active</code> vào <b>cuối</b> system prompt.
+            <span class="why">Ít quy ước nên nạp hết, không phải tìm. Phần cố định đứng trước nên prefix ổn định (có lợi cho prompt cache).</span></td>
+        </tr>
+        <tr>
+          <td class="q">Khi quy ước đổi<span>Memory sai, lỗi thời</span></td>
+          <td>Cùng <code>topic</code>: dòng cũ thành <code>[superseded … bởi session-3]</code>, thêm dòng <code>active</code> mới.
+            <span class="why">Không nạp quy ước lỗi thời, nhưng vẫn còn lịch sử và nguồn gốc thay đổi (không xóa dấu vết).</span></td>
+        </tr>
+        <tr>
+          <td class="q">Kiểm chứng<span>In memory đã inject</span></td>
+          <td>In khối <code>MEMORY INJECTED</code> mỗi session và để code kiểm file thật agent đã tạo.
+            <span class="why">Không dựa vào lời agent tự nói "mình đã nhớ".</span></td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Chạy thật: 4 session, history rỗng mỗi lần</h2>
+      <div class="flow">
+        <div class="row">
+          <div class="tag">Session 1<small>chốt quy ước</small></div>
+          <div class="body">Tên <code>bao-cao-YYYY-MM-DD.md</code>, tiếng Việt, dòng đầu <code>TL;DR:</code>
+            <span class="out">→ agent gọi tool, ghi vào MEMORY.md</span></div>
+        </div>
+        <div class="row">
+          <div class="tag">Session 2<small>mới, không nhắc lại</small></div>
+          <div class="body">"Đọc weekly_notes.md, viết báo cáo tuần."
+            <span class="out">→ nạp memory, tạo <code>bao-cao-2026-10-21.md</code> ✓</span></div>
+        </div>
+        <div class="row change">
+          <div class="tag">Session 3<small>đổi quy ước</small></div>
+          <div class="body">Tên <code>report-YYYY-MM-DD.md</code>, tiếng Anh, vẫn <code>TL;DR:</code>
+            <span class="out">→ dòng cũ superseded, dòng mới active</span></div>
+        </div>
+        <div class="row change">
+          <div class="tag">Session 4<small>mới, không nhắc lại</small></div>
+          <div class="body">Cùng câu lệnh như session 2.
+            <span class="out">→ chỉ nạp quy ước mới, tạo <code>report-2026-10-21.md</code> (EN) ✓</span></div>
+        </div>
+      </div>
+      <div class="mem">
+        <div class="file">memory/MEMORY.md (sau session 3)</div>
+        <div class="old"><span class="badge">[superseded … bởi session-3]</span> topic=report-format | rule=…bao-cao-YYYY-MM-DD.md, tiếng Việt…</div>
+        <div class="new">[active] topic=report-format | rule=…report-YYYY-MM-DD.md, tiếng Anh…</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="proof"><b>PASS</b>Chứng minh 1: session 2 chỉ tạo <code>bao-cao-2026-10-21.md</code>, dòng đầu <code>TL;DR:</code>, nội dung tiếng Việt.</div>
+    <div class="proof"><b>PASS</b>Chứng minh 2: session 4 chỉ tạo <code>report-2026-10-21.md</code>, tiếng Anh, memory nạp không còn quy ước cũ.</div>
+    <div class="lesson"><b>Lỗi gặp khi làm:</b> lần chạy thứ 2, agent tự ghi thêm câu "quy ước cũ là bao-cao-…" vào rule mới, làm memory lẫn thông tin lỗi thời. Sửa bằng 1 dòng prompt: rule chỉ chứa quy ước hiện hành, lịch sử do code giữ.</div>
+  </footer>
+</div>
+
+<script>
+  // Scale sân khấu 1280x720 vừa cửa sổ, giữ tỉ lệ 16:9
+  const stage = document.getElementById("stage");
+  function fit() {
+    const s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    stage.style.transform = "translate(-50%, -50%) scale(" + s + ")";
+  }
+  window.addEventListener("resize", fit);
+  fit();
+</script>
+</body>
+</html>
