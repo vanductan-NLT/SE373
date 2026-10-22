@@ -1,6 +1,6 @@
 # BTVN#5 · Challenge A: Persistent memory (Buổi 7)
 
-**Sinh viên:** Văn Đức Tân · **MSSV:** 24521586 · **Lớp:** SE373.R11
+**Nhóm:** 15 · **Lớp:** SE373.R11
 
 Agent nhớ quy ước dự án qua nhiều session và cập nhật khi quy ước đổi. Agent nền là `stage-01-files` của BTVN#4
 (LangChain `create_agent`, tool `read_file`/`write_file`/`list_files`), thêm 1 tool `remember_convention` và một file memory.
