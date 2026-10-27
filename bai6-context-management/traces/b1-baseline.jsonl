@@ -1,0 +1,15 @@
+{"n": 1, "turn": "T1", "kind": "agent", "input_tokens": 998, "output_tokens": 58, "cache_hit": 768}
+{"n": 2, "turn": "T1", "kind": "agent", "input_tokens": 14524, "output_tokens": 634, "cache_hit": 1024}
+{"n": 3, "turn": "T2", "kind": "agent", "input_tokens": 15158, "output_tokens": 29, "cache_hit": 14464}
+{"n": 4, "turn": "T2", "kind": "agent", "input_tokens": 22486, "output_tokens": 693, "cache_hit": 15104}
+{"n": 5, "turn": "T3", "kind": "agent", "input_tokens": 23135, "output_tokens": 212, "cache_hit": 15104}
+{"n": 6, "turn": "T3", "kind": "agent", "input_tokens": 23453, "output_tokens": 23, "cache_hit": 23296}
+{"n": 7, "turn": "T3", "kind": "agent", "input_tokens": 30775, "output_tokens": 703, "cache_hit": 23424}
+{"n": 8, "turn": "T4", "kind": "agent", "input_tokens": 31295, "output_tokens": 41, "cache_hit": 23040}
+{"n": 9, "turn": "T4", "kind": "agent", "input_tokens": 43433, "output_tokens": 1557, "cache_hit": 31232}
+{"n": 10, "turn": "T5", "kind": "agent", "input_tokens": 44384, "output_tokens": 58, "cache_hit": 43392}
+{"n": 11, "turn": "T5", "kind": "agent", "input_tokens": 56090, "output_tokens": 2306, "cache_hit": 44416}
+{"n": 12, "turn": "HỎI LẠI", "kind": "agent", "input_tokens": 57221, "output_tokens": 816, "cache_hit": 44288}
+{"n": 13, "turn": "LÀM TIẾP", "kind": "agent", "input_tokens": 58012, "output_tokens": 561, "cache_hit": 57216}
+{"n": 14, "turn": "LÀM TIẾP", "kind": "agent", "input_tokens": 58902, "output_tokens": 23, "cache_hit": 58496}
+{"n": 15, "turn": "LÀM TIẾP", "kind": "agent", "input_tokens": 64725, "output_tokens": 434, "cache_hit": 58880}

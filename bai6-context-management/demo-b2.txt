@@ -1,0 +1,161 @@
+
+==============================================================================
+B2 · NATIVE · 50 file
+==============================================================================
+USER: Trong các file log trong thư mục logs/ (toàn bộ 50 file service-01.log … service-50.log), chỉ tính các dòng có mức ERROR (không tính WARN hay INFO): lỗi nào xuất hiện nhiều nhất? Cho biết tên lỗi, tổng số lần xuất hiện trên toàn bộ các file đó, và file có nhiều dòng ERROR của lỗi này nhất (kèm số lần trong file đó). Tên lỗi là từ đứng ngay sau 'ERROR [service-xx] ' và trước dấu ':'.
+[kết thúc] trạng thái: OK | 8 lần gọi model | 51 lần chạy tool | 51s
+AGENT: ## Kết quả
+
+Đã đọc toàn bộ 50 file `logs/service-01.log` … `logs/service-50.log` và chỉ đếm các dòng mức **ERROR** (bỏ qua WARN/INFO).
+
+**Lỗi xuất hiện nhiều nhất: `TimeoutError`**
+
+- **Tổng số lần trên cả 50 file:** **174**
+- **File có nhiều ERROR `TimeoutError` nhất:** **`logs/service-37.log` — 16 lần**
+
+### Phân bố theo loại lỗi (chỉ ERROR)
+
+| Lỗi | Tổng số lần |
+|---|---|
+| TimeoutError | 174 |
+| ConnectionResetError | 132 |
+| DBPoolExhaustedError | 80 |
+| AuthTokenExpired | 62 |
+| ValidationError | 40 |
+| DiskQuotaExceeded | 30 |
+| **Tổng cộng** | **518** |
+
+### Top file nhiều `TimeoutError` nhất
+
+| File | Số lần |
+|---|---|
+| service-37.log | 16 |
+| service-38.log | 10 |
+| service-05.log | 6 |
+| service-42.log | 6 |
+| service-31 / 35 / 44 / 47 / 48 / 49 | 5 mỗi file |
+
+Lưu ý: tên lỗi được lấy đúng theo quy tắc (từ ngay sau `ERROR [service-xx] ` và trước dấu `:`), nên `TimeoutError` ở đây gộp cả các biến thể message (`exceeded 3000ms / 5000ms / 8000ms`).
+Đáp án đúng: TimeoutError 174 lần; file service-37.log 16 lần
+  tên lỗi = TimeoutError: PASS
+  tổng = 174: PASS
+  file = service-37.log: PASS
+  số lần trong file = 16: PASS
+
+==============================================================================
+B2 · CODE · 50 file
+==============================================================================
+USER: Trong các file log trong thư mục logs/ (toàn bộ 50 file service-01.log … service-50.log), chỉ tính các dòng có mức ERROR (không tính WARN hay INFO): lỗi nào xuất hiện nhiều nhất? Cho biết tên lỗi, tổng số lần xuất hiện trên toàn bộ các file đó, và file có nhiều dòng ERROR của lỗi này nhất (kèm số lần trong file đó). Tên lỗi là từ đứng ngay sau 'ERROR [service-xx] ' và trước dấu ':'.
+[kết thúc] trạng thái: OK | 4 lần gọi model | 3 lần chạy tool | 6s
+Chương trình model viết ở lần chạy cuối:
+import os,re,collections
+pat=re.compile(r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} ERROR \[service-\d+\] ([A-Za-z0-9_.\-]+):')
+per=collections.defaultdict(collections.Counter)
+for f in sorted(os.listdir('logs')):
+    for ln in open('logs/'+f):
+        m=pat.match(ln)
+        if m: per[m.group(1)][f]+=1
+for n in ['TimeoutError','ConnectionResetError']:
+    mx=max(per[n].values())
+    print(n,[ (f,c) for f,c in per[n].most_common() if c==mx])
+AGENT: **Kết quả**
+
+- Lỗi ERROR xuất hiện nhiều nhất: **TimeoutError**
+- Tổng số lần trên toàn bộ 50 file: **174 lần**
+- File có nhiều ERROR TimeoutError nhất: **service-37.log — 16 lần**
+
+Bối cảnh: tổng cộng 11.411 dòng log, trong đó **518 dòng ERROR** (chỉ tính mức ERROR), thuộc **6 loại lỗi** khác nhau. Hai loại tiếp theo là ConnectionResetError (132 lần) và DBPoolExhaustedError (80 lần).
+Đáp án đúng: TimeoutError 174 lần; file service-37.log 16 lần
+  tên lỗi = TimeoutError: PASS
+  tổng = 174: PASS
+  file = service-37.log: PASS
+  số lần trong file = 16: PASS
+
+==============================================================================
+B2 · NATIVE · 10 file
+==============================================================================
+USER: Trong các file log trong thư mục logs/ (chỉ 10 file đầu: service-01.log … service-10.log), chỉ tính các dòng có mức ERROR (không tính WARN hay INFO): lỗi nào xuất hiện nhiều nhất? Cho biết tên lỗi, tổng số lần xuất hiện trên toàn bộ các file đó, và file có nhiều dòng ERROR của lỗi này nhất (kèm số lần trong file đó). Tên lỗi là từ đứng ngay sau 'ERROR [service-xx] ' và trước dấu ':'.
+[kết thúc] trạng thái: OK | 4 lần gọi model | 11 lần chạy tool | 13s
+AGENT: ## Kết quả (10 file service-01 … service-10, chỉ dòng mức ERROR)
+
+**Lỗi xuất hiện nhiều nhất: `TimeoutError` — 28 lần** trên toàn bộ 10 file.
+
+File có nhiều lỗi này nhất: **logs/service-05.log — 6 lần**.
+
+### Bảng tổng hợp số dòng ERROR theo tên lỗi
+
+| Tên lỗi | Tổng | Phân bố theo file |
+|---|---|---|
+| TimeoutError | **28** | 01:2, 02:3, 03:3, 04:2, **05:6**, 06:1, 07:3, 08:4, 09:2, 10:2 |
+| ConnectionResetError | 20 | 02:3, 03:1, 04:4, 05:4, 06:1, 07:4, 08:2, 09:1 |
+| DBPoolExhaustedError | 16 | 01:3, 02:1, 03:2, 04:1, 05:2, 06:2, 07:1, 08:1, 09:1, 10:2 |
+| AuthTokenExpired | 13 | 01:1, 02:1, 03:1, 04:2, 06:2, 07:1, 08:2, 09:2, 10:1 |
+| ValidationError | 7 | 02:2, 03:2, 08:2, 10:1 |
+| DiskQuotaExceeded | 2 | 03:1, 07:1 |
+
+Tổng số dòng ERROR trong 10 file: **86** (khớp với tổng theo từng file: 6+10+10+9+12+6+10+11+6+6).
+
+Lưu ý: chỉ tính dòng bắt đầu bằng mức `ERROR`; các dòng `WARN ... retrying after <X>Error` không được tính.
+Đáp án đúng: TimeoutError 28 lần; file service-05.log 6 lần
+  tên lỗi = TimeoutError: PASS
+  tổng = 28: PASS
+  file = service-05.log: PASS
+  số lần trong file = 6: PASS
+
+==============================================================================
+B2 · CODE · 10 file
+==============================================================================
+USER: Trong các file log trong thư mục logs/ (chỉ 10 file đầu: service-01.log … service-10.log), chỉ tính các dòng có mức ERROR (không tính WARN hay INFO): lỗi nào xuất hiện nhiều nhất? Cho biết tên lỗi, tổng số lần xuất hiện trên toàn bộ các file đó, và file có nhiều dòng ERROR của lỗi này nhất (kèm số lần trong file đó). Tên lỗi là từ đứng ngay sau 'ERROR [service-xx] ' và trước dấu ':'.
+[kết thúc] trạng thái: OK | 3 lần gọi model | 2 lần chạy tool | 5s
+Chương trình model viết ở lần chạy cuối:
+
+import re, collections
+files = [f'logs/service-{i:02d}.log' for i in range(1,11)]
+pat = re.compile(r'ERROR \[service-\d+\] (\S+?):')
+cnt = collections.Counter()
+per = collections.defaultdict(collections.Counter)
+err_samples=set()
+lines_total=0
+odd=[]
+for f in files:
+    for line in open(f):
+        lines_total+=1
+        if 'ERROR' in line:
+            m = pat.search(line)
+            if m:
+                name=m.group(1); cnt[name]+=1; per[name][f]+=1
+                if len(err_samples)<3: err_samples.add(line.strip())
+            else:
+                odd.append(line.strip())
+print('lines', lines_total)
+print('errors total matched', sum(cnt.values()))
+print('top5', cnt.most_common(5))
+top=cnt.most_common(1)[0]
+print('winner', top, 'per-file', per[top[0]].most_common(5))
+print('unmatched', len(odd), odd[:3])
+print('samples', err_samples)
+
+AGENT: **Kết quả (10 file service-01…service-10, 2278 dòng, 86 dòng ERROR):**
+
+- **Lỗi nhiều nhất: `TimeoutError` — 28 lần** trên toàn bộ 10 file.
+- File có nhiều ERROR `TimeoutError` nhất: **service-05.log — 6 lần**.
+
+Xếp sau: ConnectionResetError (20), DBPoolExhaustedError (16), AuthTokenExpired (13), ValidationError (7). Chỉ tính dòng mức ERROR, không tính WARN/INFO.
+Đáp án đúng: TimeoutError 28 lần; file service-05.log 6 lần
+  tên lỗi = TimeoutError: PASS
+  tổng = 28: PASS
+  file = service-05.log: PASS
+  số lần trong file = 6: PASS
+
+==============================================================================
+SO SÁNH (cùng câu hỏi, cùng bộ log; token đo bằng `usage` của API)
+==============================================================================
+chế độ  file lần gọi  tool  input tổng  input đỉnh  tool output→context  đúng?  trạng thái
+native    50       8    51   1,622,134     412,843           968,136 ký tự   ĐÚNG  OK
+code      50       4     3       6,564       2,251             1,495 ký tự   ĐÚNG  OK
+native    10       4    11     132,603      84,968           199,157 ký tự   ĐÚNG  OK
+code      10       3     2       4,327       2,013             1,665 ký tự   ĐÚNG  OK
+50 file: native tốn gấp 247.1 lần input tokens của Code Mode.
+10 file: native tốn gấp 30.6 lần input tokens của Code Mode.
+
+KẾT QUẢ B2 (Code Mode trả lời đúng ground truth ở mọi cỡ): PASS

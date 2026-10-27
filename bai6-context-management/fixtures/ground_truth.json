@@ -1,0 +1,350 @@
+{
+  "seed": 373,
+  "n_files": 50,
+  "total_lines": 11411,
+  "total_chars": 946273,
+  "error_totals": {
+    "TimeoutError": 174,
+    "ConnectionResetError": 132,
+    "DBPoolExhaustedError": 80,
+    "AuthTokenExpired": 62,
+    "ValidationError": 40,
+    "DiskQuotaExceeded": 30
+  },
+  "top_error": {
+    "name": "TimeoutError",
+    "total": 174
+  },
+  "top_file_for_top_error": {
+    "file": "service-37.log",
+    "count": 16
+  },
+  "per_file": {
+    "service-01.log": {
+      "AuthTokenExpired": 1,
+      "TimeoutError": 2,
+      "DBPoolExhaustedError": 3
+    },
+    "service-02.log": {
+      "TimeoutError": 3,
+      "ConnectionResetError": 3,
+      "ValidationError": 2,
+      "DBPoolExhaustedError": 1,
+      "AuthTokenExpired": 1
+    },
+    "service-03.log": {
+      "TimeoutError": 3,
+      "AuthTokenExpired": 1,
+      "DiskQuotaExceeded": 1,
+      "DBPoolExhaustedError": 2,
+      "ValidationError": 2,
+      "ConnectionResetError": 1
+    },
+    "service-04.log": {
+      "TimeoutError": 2,
+      "ConnectionResetError": 4,
+      "AuthTokenExpired": 2,
+      "DBPoolExhaustedError": 1
+    },
+    "service-05.log": {
+      "DBPoolExhaustedError": 2,
+      "TimeoutError": 6,
+      "ConnectionResetError": 4
+    },
+    "service-06.log": {
+      "AuthTokenExpired": 2,
+      "TimeoutError": 1,
+      "DBPoolExhaustedError": 2,
+      "ConnectionResetError": 1
+    },
+    "service-07.log": {
+      "ConnectionResetError": 4,
+      "DiskQuotaExceeded": 1,
+      "TimeoutError": 3,
+      "AuthTokenExpired": 1,
+      "DBPoolExhaustedError": 1
+    },
+    "service-08.log": {
+      "AuthTokenExpired": 2,
+      "TimeoutError": 4,
+      "ValidationError": 2,
+      "DBPoolExhaustedError": 1,
+      "ConnectionResetError": 2
+    },
+    "service-09.log": {
+      "DBPoolExhaustedError": 1,
+      "TimeoutError": 2,
+      "AuthTokenExpired": 2,
+      "ConnectionResetError": 1
+    },
+    "service-10.log": {
+      "DBPoolExhaustedError": 2,
+      "AuthTokenExpired": 1,
+      "TimeoutError": 2,
+      "ValidationError": 1
+    },
+    "service-11.log": {
+      "ConnectionResetError": 6,
+      "TimeoutError": 3,
+      "ValidationError": 2,
+      "DiskQuotaExceeded": 1,
+      "AuthTokenExpired": 1,
+      "DBPoolExhaustedError": 1
+    },
+    "service-12.log": {
+      "TimeoutError": 4,
+      "ConnectionResetError": 1,
+      "AuthTokenExpired": 2
+    },
+    "service-13.log": {
+      "TimeoutError": 2,
+      "AuthTokenExpired": 1,
+      "ConnectionResetError": 2,
+      "DBPoolExhaustedError": 1
+    },
+    "service-14.log": {
+      "DiskQuotaExceeded": 1,
+      "AuthTokenExpired": 3,
+      "TimeoutError": 1,
+      "ValidationError": 1,
+      "DBPoolExhaustedError": 2,
+      "ConnectionResetError": 2
+    },
+    "service-15.log": {
+      "ConnectionResetError": 3,
+      "TimeoutError": 2,
+      "AuthTokenExpired": 1,
+      "DBPoolExhaustedError": 2
+    },
+    "service-16.log": {
+      "TimeoutError": 3,
+      "ConnectionResetError": 2,
+      "DiskQuotaExceeded": 1
+    },
+    "service-17.log": {
+      "AuthTokenExpired": 1,
+      "DBPoolExhaustedError": 3,
+      "ConnectionResetError": 4,
+      "TimeoutError": 1,
+      "ValidationError": 1
+    },
+    "service-18.log": {
+      "ConnectionResetError": 4,
+      "DBPoolExhaustedError": 4,
+      "TimeoutError": 3
+    },
+    "service-19.log": {
+      "TimeoutError": 4,
+      "DiskQuotaExceeded": 1,
+      "ConnectionResetError": 2,
+      "AuthTokenExpired": 2
+    },
+    "service-20.log": {
+      "DBPoolExhaustedError": 2,
+      "TimeoutError": 4,
+      "ConnectionResetError": 3,
+      "AuthTokenExpired": 2,
+      "DiskQuotaExceeded": 1,
+      "ValidationError": 2
+    },
+    "service-21.log": {
+      "ConnectionResetError": 2,
+      "DiskQuotaExceeded": 2,
+      "AuthTokenExpired": 2,
+      "DBPoolExhaustedError": 1,
+      "TimeoutError": 2,
+      "ValidationError": 2
+    },
+    "service-22.log": {
+      "ConnectionResetError": 2,
+      "AuthTokenExpired": 2,
+      "TimeoutError": 3,
+      "DBPoolExhaustedError": 2
+    },
+    "service-23.log": {
+      "ConnectionResetError": 4,
+      "TimeoutError": 2,
+      "AuthTokenExpired": 3,
+      "ValidationError": 1,
+      "DBPoolExhaustedError": 1
+    },
+    "service-24.log": {
+      "ValidationError": 1,
+      "ConnectionResetError": 5,
+      "TimeoutError": 1,
+      "DBPoolExhaustedError": 1
+    },
+    "service-25.log": {
+      "AuthTokenExpired": 2,
+      "TimeoutError": 1,
+      "ConnectionResetError": 2,
+      "ValidationError": 1
+    },
+    "service-26.log": {
+      "DBPoolExhaustedError": 2,
+      "ConnectionResetError": 3,
+      "AuthTokenExpired": 2,
+      "TimeoutError": 2
+    },
+    "service-27.log": {
+      "ValidationError": 1,
+      "ConnectionResetError": 3,
+      "TimeoutError": 1,
+      "DBPoolExhaustedError": 1
+    },
+    "service-28.log": {
+      "DBPoolExhaustedError": 3,
+      "AuthTokenExpired": 3,
+      "ConnectionResetError": 2,
+      "DiskQuotaExceeded": 2,
+      "TimeoutError": 3
+    },
+    "service-29.log": {
+      "ValidationError": 2,
+      "DBPoolExhaustedError": 1,
+      "DiskQuotaExceeded": 1,
+      "TimeoutError": 4,
+      "ConnectionResetError": 1
+    },
+    "service-30.log": {
+      "DBPoolExhaustedError": 1,
+      "TimeoutError": 4,
+      "AuthTokenExpired": 2,
+      "DiskQuotaExceeded": 1
+    },
+    "service-31.log": {
+      "TimeoutError": 5,
+      "ConnectionResetError": 2,
+      "ValidationError": 1,
+      "DBPoolExhaustedError": 2,
+      "AuthTokenExpired": 1
+    },
+    "service-32.log": {
+      "ConnectionResetError": 6,
+      "AuthTokenExpired": 1,
+      "ValidationError": 1,
+      "TimeoutError": 4,
+      "DBPoolExhaustedError": 2
+    },
+    "service-33.log": {
+      "ConnectionResetError": 1,
+      "AuthTokenExpired": 1,
+      "TimeoutError": 1,
+      "DBPoolExhaustedError": 2,
+      "ValidationError": 1
+    },
+    "service-34.log": {
+      "TimeoutError": 4,
+      "ConnectionResetError": 4,
+      "AuthTokenExpired": 1,
+      "DBPoolExhaustedError": 1
+    },
+    "service-35.log": {
+      "TimeoutError": 5,
+      "ConnectionResetError": 4,
+      "DiskQuotaExceeded": 1,
+      "DBPoolExhaustedError": 2
+    },
+    "service-36.log": {
+      "DBPoolExhaustedError": 1,
+      "AuthTokenExpired": 1,
+      "DiskQuotaExceeded": 1,
+      "TimeoutError": 3,
+      "ConnectionResetError": 4,
+      "ValidationError": 1
+    },
+    "service-37.log": {
+      "TimeoutError": 16,
+      "ConnectionResetError": 2,
+      "DiskQuotaExceeded": 1,
+      "DBPoolExhaustedError": 2,
+      "ValidationError": 1
+    },
+    "service-38.log": {
+      "DiskQuotaExceeded": 1,
+      "TimeoutError": 10,
+      "ConnectionResetError": 2,
+      "AuthTokenExpired": 1
+    },
+    "service-39.log": {
+      "TimeoutError": 5,
+      "ValidationError": 1,
+      "ConnectionResetError": 4,
+      "DBPoolExhaustedError": 4
+    },
+    "service-40.log": {
+      "DBPoolExhaustedError": 2,
+      "ConnectionResetError": 5,
+      "TimeoutError": 3,
+      "DiskQuotaExceeded": 2,
+      "ValidationError": 1
+    },
+    "service-41.log": {
+      "ConnectionResetError": 5,
+      "AuthTokenExpired": 1,
+      "TimeoutError": 3,
+      "ValidationError": 2,
+      "DBPoolExhaustedError": 2
+    },
+    "service-42.log": {
+      "TimeoutError": 6,
+      "ValidationError": 1,
+      "DiskQuotaExceeded": 1,
+      "ConnectionResetError": 3,
+      "AuthTokenExpired": 1
+    },
+    "service-43.log": {
+      "ConnectionResetError": 5,
+      "AuthTokenExpired": 1,
+      "ValidationError": 2,
+      "DBPoolExhaustedError": 5,
+      "TimeoutError": 1
+    },
+    "service-44.log": {
+      "DiskQuotaExceeded": 1,
+      "AuthTokenExpired": 3,
+      "TimeoutError": 5,
+      "DBPoolExhaustedError": 3,
+      "ConnectionResetError": 2
+    },
+    "service-45.log": {
+      "TimeoutError": 3,
+      "ValidationError": 2,
+      "DiskQuotaExceeded": 2
+    },
+    "service-46.log": {
+      "DiskQuotaExceeded": 2,
+      "ValidationError": 1,
+      "AuthTokenExpired": 2,
+      "TimeoutError": 4,
+      "ConnectionResetError": 2,
+      "DBPoolExhaustedError": 2
+    },
+    "service-47.log": {
+      "DBPoolExhaustedError": 1,
+      "AuthTokenExpired": 1,
+      "TimeoutError": 5,
+      "ConnectionResetError": 2,
+      "DiskQuotaExceeded": 4
+    },
+    "service-48.log": {
+      "DBPoolExhaustedError": 1,
+      "AuthTokenExpired": 2,
+      "TimeoutError": 5,
+      "ValidationError": 2,
+      "ConnectionResetError": 3
+    },
+    "service-49.log": {
+      "ConnectionResetError": 2,
+      "TimeoutError": 5,
+      "DBPoolExhaustedError": 4,
+      "DiskQuotaExceeded": 1
+    },
+    "service-50.log": {
+      "ValidationError": 2,
+      "TimeoutError": 3,
+      "AuthTokenExpired": 3,
+      "ConnectionResetError": 1
+    }
+  }
+}

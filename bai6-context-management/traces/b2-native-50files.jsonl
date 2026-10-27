@@ -1,0 +1,8 @@
+{"n": 1, "turn": 0, "kind": "agent", "input_tokens": 849, "output_tokens": 46, "cache_hit": 0}
+{"n": 2, "turn": 0, "kind": "agent", "input_tokens": 3428, "output_tokens": 355, "cache_hit": 768}
+{"n": 3, "turn": 0, "kind": "agent", "input_tokens": 84110, "output_tokens": 1458, "cache_hit": 3712}
+{"n": 4, "turn": 0, "kind": "agent", "input_tokens": 166294, "output_tokens": 1486, "cache_hit": 85504}
+{"n": 5, "turn": 0, "kind": "agent", "input_tokens": 249416, "output_tokens": 1464, "cache_hit": 167680}
+{"n": 6, "turn": 0, "kind": "agent", "input_tokens": 332150, "output_tokens": 1912, "cache_hit": 250880}
+{"n": 7, "turn": 0, "kind": "agent", "input_tokens": 373044, "output_tokens": 849, "cache_hit": 333952}
+{"n": 8, "turn": 0, "kind": "agent", "input_tokens": 412843, "output_tokens": 4514, "cache_hit": 373888}

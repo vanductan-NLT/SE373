@@ -1,0 +1,3 @@
+{"n": 1, "turn": 0, "kind": "agent", "input_tokens": 921, "output_tokens": 112, "cache_hit": 768}
+{"n": 2, "turn": 0, "kind": "agent", "input_tokens": 1393, "output_tokens": 320, "cache_hit": 1024}
+{"n": 3, "turn": 0, "kind": "agent", "input_tokens": 2013, "output_tokens": 194, "cache_hit": 1664}

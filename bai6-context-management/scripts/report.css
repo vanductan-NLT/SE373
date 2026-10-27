@@ -1,0 +1,35 @@
+@page { size: A4; margin: 12mm 12mm 14mm 12mm; }
+* { box-sizing: border-box; }
+body { font-family: "Segoe UI", Arial, sans-serif; font-size: 9.6pt; line-height: 1.4; color: #111827; margin: 0; }
+h1 { font-size: 17pt; margin: 0 0 2px; }
+h2 { font-size: 12.5pt; margin: 14px 0 6px; padding-bottom: 3px; border-bottom: 2px solid #2563eb; break-after: avoid; }
+h3 { font-size: 10pt; margin: 10px 0 4px; color: #1e3a8a; break-after: avoid; }
+p, ul { margin: 3px 0; }
+ul { padding-left: 16px; }
+.meta { color: #374151; margin-bottom: 6px; }
+.small { font-size: 8.4pt; color: #4b5563; }
+.pass { display: inline-block; background: #16a34a; color: #fff; font-weight: 700; padding: 0 7px; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin: 4px 0; font-size: 8.8pt; }
+th, td { border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; vertical-align: top; }
+th { background: #eff6ff; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+code { font-family: "Cascadia Mono", Consolas, monospace; font-size: 8.4pt; background: #f1f5f9; padding: 0 3px; border-radius: 2px; }
+figure { margin: 6px 0 8px; break-inside: avoid; }
+figcaption { font-size: 8.2pt; color: #4b5563; margin-top: 2px; }
+figcaption b { color: #111827; }
+.term { border: 1px solid #1e293b; border-radius: 5px; overflow: hidden; }
+.term .bar { background: #1e293b; color: #cbd5e1; font-family: "Cascadia Mono", Consolas, monospace; font-size: 7.6pt; padding: 3px 8px; }
+.term .bar::before { content: "\25CF \25CF \25CF  "; color: #64748b; letter-spacing: 1px; }
+.term pre { margin: 0; padding: 6px 8px; background: #0f172a; color: #e2e8f0; font-family: "Cascadia Mono", Consolas, monospace;
+            font-size: 6.9pt; line-height: 1.32; white-space: pre-wrap; word-break: break-word; }
+.term .ok { color: #4ade80; font-weight: 700; }
+.term .bad { color: #f87171; font-weight: 700; }
+.term .warn { color: #fbbf24; }
+.term .hl { color: #38bdf8; font-weight: 700; }
+.term .dim { color: #94a3b8; }
+.cols { display: flex; gap: 8px; }
+.cols > * { flex: 1; min-width: 0; }
+.chart { border: 1px solid #cbd5e1; border-radius: 5px; padding: 4px; background: #fff; }
+svg text { font-family: "Segoe UI", Arial, sans-serif; }
+.box { border: 1px solid #93c5fd; background: #eff6ff; border-radius: 5px; padding: 5px 8px; margin: 6px 0; }
+.pagebreak { break-before: page; }
